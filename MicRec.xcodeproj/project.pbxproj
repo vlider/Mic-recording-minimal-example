@@ -98,7 +98,6 @@
 				TargetAttributes = {
 					384BE6551D9148DC002BAC92 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = CTQ36DYR2H;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -261,13 +260,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CTQ36DYR2H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/MicRec/3rd/lame-3.99.5/include\"";
 				INFOPLIST_FILE = MicRec/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "\"$(SRCROOT)/MicRec/3rd/lame-3.99.5/libmp3lame.a\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alttab.adventures.MicRec;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vlider.MicRec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MicRec/MicRec-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -278,13 +277,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CTQ36DYR2H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/MicRec/3rd/lame-3.99.5/include\"";
 				INFOPLIST_FILE = MicRec/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "\"$(SRCROOT)/MicRec/3rd/lame-3.99.5/libmp3lame.a\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alttab.adventures.MicRec;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vlider.MicRec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MicRec/MicRec-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
