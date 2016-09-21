@@ -22,7 +22,6 @@
 		384BE6601D9148DC002BAC92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		384BE6631D9148DC002BAC92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		384BE6651D9148DC002BAC92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		384BE66B1D914CC1002BAC92 /* MicRec-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MicRec-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +60,6 @@
 				384BE6601D9148DC002BAC92 /* Assets.xcassets */,
 				384BE6621D9148DC002BAC92 /* LaunchScreen.storyboard */,
 				384BE6651D9148DC002BAC92 /* Info.plist */,
-				384BE66B1D914CC1002BAC92 /* MicRec-Bridging-Header.h */,
 			);
 			path = MicRec;
 			sourceTree = "<group>";
@@ -98,6 +96,7 @@
 				TargetAttributes = {
 					384BE6551D9148DC002BAC92 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = CTQ36DYR2H;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -260,15 +259,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CTQ36DYR2H;
 				ENABLE_BITCODE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/MicRec/3rd/lame-3.99.5/include\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MicRec/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "\"$(SRCROOT)/MicRec/3rd/lame-3.99.5/libmp3lame.a\"";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vlider.MicRec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "MicRec/MicRec-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -277,15 +276,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CTQ36DYR2H;
 				ENABLE_BITCODE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/MicRec/3rd/lame-3.99.5/include\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MicRec/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "\"$(SRCROOT)/MicRec/3rd/lame-3.99.5/libmp3lame.a\"";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vlider.MicRec;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "MicRec/MicRec-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -309,6 +308,7 @@
 				384BE66A1D9148DC002BAC92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

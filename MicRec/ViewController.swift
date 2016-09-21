@@ -13,18 +13,14 @@ class ViewController: UIViewController {
 
     // engine for getting audio pcm stream
     var engine: AVAudioEngine?
-    // lame codec
-    var lame: lame_t?
-    // buffer for converting from pcm to mp3
-    var mp3buf = UnsafeMutablePointer<UInt8>.allocate(capacity: 4096)
-    
-    // this is for testing purposes
-    var file = NSMutableData()
+
+    // we will write to file
+    var file: AVAudioFile?
     
     deinit {
-        mp3buf.deallocate(capacity: 4096)
-        
-        // @TODO: possibly need to release resources taken by lame
+        file = nil
+        engine?.inputNode?.removeTap(onBus: 0)
+        engine = nil
     }
     
     override func viewDidLoad() {
@@ -37,8 +33,14 @@ class ViewController: UIViewController {
             return
         }
         
-        // setup lame codec
-        prepareLame()
+        do {
+            var url = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            url.appendPathComponent("1.wav")
+            
+            file = try AVAudioFile(forWriting: url, settings: [AVLinearPCMIsFloatKey: true, AVLinearPCMIsNonInterleaved: false])
+        } catch {
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,23 +56,6 @@ class ViewController: UIViewController {
         removeTap()
     }
 
-    func prepareLame() {
-        
-        guard let engine = engine, let input = engine.inputNode else {
-            // @TODO: error out
-            return
-        }
-        
-        let sampleRate = Int32(input.inputFormat(forBus: 0).sampleRate)
-        
-        lame = lame_init()
-        lame_set_in_samplerate(lame, sampleRate / 2)
-        lame_set_VBR(lame, vbr_default/*vbr_off*/)
-        lame_set_out_samplerate(lame, 0) // which means LAME picks best value
-        lame_set_quality(lame, 4); // normal quality, quite fast encoding
-        lame_init_params(lame)
-    }
-    
     func installTap() {
     
         engine = AVAudioEngine()
@@ -85,18 +70,33 @@ class ViewController: UIViewController {
             guard let this = self else {
                 return
             }
+    
+            // writing to file: for testing purposes only
+            do {
+                try this.file!.write(from: buffer)
+            } catch {
+                
+            }
             
             if let channel1Buffer = buffer.floatChannelData?[0] {
-                /// encode PCM to mp3
-                let frameLength = Int32(buffer.frameLength) / 2
-                let bytesWritten = lame_encode_buffer_interleaved_ieee_float(this.lame, channel1Buffer, frameLength, this.mp3buf, 4096)
-                // `bytesWritten` bytes stored in this.mp3buf now mp3-encoded
-                print("\(bytesWritten) encoded")
-                
-                this.file.append(this.mp3buf, length: Int(bytesWritten))
+                /*! @property floatChannelData
+                 @abstract Access the buffer's float audio samples.
+                 @discussion
+                 floatChannelData returns pointers to the buffer's audio samples if the buffer's format is
+                 32-bit float, or nil if it is another format.
+                 
+                 The returned pointer is to format.channelCount pointers to float. Each of these pointers
+                 is to "frameLength" valid samples, which are spaced by "stride" samples.
+                 
+                 If format.interleaved is false (as with the standard deinterleaved float format), then
+                 the pointers will be to separate chunks of memory. "stride" is 1.
+                 
+                 If format.interleaved is true, then the pointers will refer into the same chunk of interleaved
+                 samples, each offset by 1 frame. "stride" is the number of interleaved channels.
+                 */
                 
                 // @TODO: send data, better to pass into separate queue for processing
-            }
+            }            
         })
 
         engine.prepare()
@@ -113,16 +113,7 @@ class ViewController: UIViewController {
         engine?.inputNode?.removeTap(onBus: 0)
         engine = nil
         
-        do {
-            var url = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            url.appendPathComponent("mic.mp3")
-            
-            file.write(to: url, atomically: true)
-            
-            print("path: \(url)")
-        } catch {
-            
-        }
+        file = nil
     }
 }
 
