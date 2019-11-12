@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     var file = NSMutableData()
     
     deinit {
-        mp3buf.deallocate(capacity: 4096)
+        mp3buf.deallocate()
         
         // @TODO: possibly need to release resources taken by lame
     }
@@ -56,11 +56,11 @@ class ViewController: UIViewController {
 
     func prepareLame() {
         
-        guard let engine = engine, let input = engine.inputNode else {
+        guard let engine = engine else {
             // @TODO: error out
             return
         }
-        
+        let input = engine.inputNode
         let sampleRate = Int32(input.inputFormat(forBus: 0).sampleRate)
         
         lame = lame_init()
@@ -74,11 +74,11 @@ class ViewController: UIViewController {
     func installTap() {
     
         engine = AVAudioEngine()
-        guard let engine = engine, let input = engine.inputNode else {
+        guard let engine = engine else {
             // @TODO: error out
             return
         }
-        
+        let input = engine.inputNode
         let format = input.inputFormat(forBus: 0)
         input.installTap(onBus: 0, bufferSize:4096, format:format, block: { [weak self] buffer, when in
             
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
 
     func removeTap() {
         
-        engine?.inputNode?.removeTap(onBus: 0)
+        engine?.inputNode.removeTap(onBus: 0)
         engine = nil
         
         do {
